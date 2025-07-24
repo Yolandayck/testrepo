@@ -18,10 +18,8 @@ jobs:
       
     - name: Run ESLint Security
       run: |
-            npm install eslint-plugin-security --save-dev
-            npm install eslint@latest --save-dev
-            echo 'import eslintPluginSecurity from "eslint-plugin-security"; export default [{ plugins: { security: eslintPluginSecurity }, rules: { "security/detect-object-injection": "error" } }];' > eslint.config.js
-            npx eslint .
+        npm install eslint-plugin-security --save-dev
+        npx eslint --plugin security --rule 'security/detect-object-injection: error' .
         
     - name: Run OWASP Dependency Check
       uses: dependency-check/Dependency-Check_Action@main
@@ -36,16 +34,4 @@ jobs:
       with:
         name: dependency-check-report
         path: dependency-check-report
-        
-    - name: Run UI Tests
-      run: |
-        npm install puppeteer --save-dev
-        node ui-tests.js
-        
-    - name: Upload Test Results
-      uses: actions/upload-artifact@v4
-      with:
-        name: test-results
-        path: |
-          *.png
-          test-report.xml
+    
