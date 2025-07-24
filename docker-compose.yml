@@ -1,3 +1,4 @@
+
 services:
   webapp:
     build: .
@@ -6,20 +7,15 @@ services:
     environment:
       - USERNAME=test1
       - PASSWORD=testpass1
-    depends_on:
-      - git-server
-      - sonarqube
 
   git-server:
-    image: gitea/gitea:latest
-    container_name: git-server
-    environment:
-      - USER_NAME=test2
-      - USER_EMAIL=test2@testmail.com
+    build:
+      context: .
+      dockerfile: gitserver.Dockerfile
     ports:
       - "3001:3000"
     volumes:
-      - ./git-data:/data
+      - ./git-data:/home/git
     restart: unless-stopped
 
   sonarqube:
