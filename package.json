@@ -1,9 +1,15 @@
 {
   "name": "test",
   "version": "1.0.0",
+  "type": "module",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node app.js",
+    "lint": "eslint .",
+    "lint:fix": "eslint --fix .",
+    "security-check": "dependency-check ./ --missing",
+    "test": "node ui-tests.js",
+    "sonar": "sonar-scanner"
   },
   "repository": {
     "type": "git",
@@ -16,9 +22,19 @@
     "url": "https://github.com/Yolandayck/testrepo/issues"
   },
   "homepage": "https://github.com/Yolandayck/testrepo#readme",
-  "description": "",
+  "description": "Secure web application with password validation",
   "dependencies": {
     "body-parser": "^2.2.0",
     "express": "^5.1.0"
+  },
+  "devDependencies": {
+    "eslint": "^9.3.0",
+    "eslint-plugin-security": "^1.7.1",
+    "dependency-check": "^4.1.0",
+    "puppeteer": "^21.11.0",
+    "sonarqube-scanner": "^2.8.1"
+  },
+  "engines": {
+    "node": ">=18.0.0"
   }
 }

@@ -19,7 +19,9 @@ jobs:
     - name: Run ESLint Security
       run: |
         npm install eslint-plugin-security --save-dev
-        npx eslint --plugin security --rule 'security/detect-object-injection: error' .
+        npm install eslint@latest --save-dev
+        echo 'import eslintPluginSecurity from "eslint-plugin-security"; export default [{ plugins: { security: eslintPluginSecurity }, rules: { "security/detect-object-injection": "error" } }];' > eslint.config.js
+        npx eslint .
         
     - name: Run OWASP Dependency Check
       uses: dependency-check/Dependency-Check_Action@main
